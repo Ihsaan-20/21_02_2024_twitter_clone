@@ -1,11 +1,24 @@
 <div class="comment mb-2">
-    <div class="d-flex justify-content-between">
-      <div>
-        <strong>User456</strong>
-        <p>This is a comment. Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
-      </div>
-      <div>
-        <small class="text-muted">30 minutes ago</small>
-      </div>
+  <div class="row">
+    <div class="col-lg-12">
+     <form action="{{route('idea.comment.store', $idea->id)}}" method="POST" enctype="multipart/form-data">
+      @csrf
+        <input type="text" name="comment" class="form-control" placeholder="add your comment" id="comment">
+        <button class="btn btn-primary mt-2 mb-2 px-5">-></button>
+        <hr>
+     </form>
     </div>
+  </div>
+      @foreach ($idea->comments as $comment )
+          <div class="d-flex justify-content-between">
+            <div>
+              <strong>{{"admin"}}</strong>
+              <p>{{$comment->content}}</p>
+            </div>
+            <div>
+              <small class="text-muted">{{$comment->created_at}}</small>
+            </div>
+          </div>
+        @endforeach
+        
   </div>

@@ -48,17 +48,33 @@
 
       <!-- Main Content -->
       <div class="col-md-9">
-        <!-- Post Form -->
         <div class="card mb-3 shadow">
-            @include('twitter.shared.create-tweet')
-        </div>
-
-        <!-- Posts -->
-        <!-- Example post -->  
-        @foreach ($ideas as $idea)
-          @include('twitter.shared.twitter-card')
-        @endforeach
-       
+            <div class="card-body">
+                      <div class="row">
+                        <div class="col-md-2">
+                          <img src="https://via.placeholder.com/50" alt="Profile Picture" class="rounded-circle">
+                          <p class="text-muted">1 hour ago</p>
+                        </div>
+                        <div class="col-md-7">
+                          <h5 class="card-title">{{"Ihsaan"}}</h5>
+                          <p class="card-text">{{$idea->content}}</p>
+                        </div>
+                    
+                        <div class="col-md-3 text-right">
+                          <a href="" class="btn btn-primary btn-sm mb-2">Edit</a>
+                          <a href="{{route('idea.index')}}" class="btn btn-danger btn-sm mb-2">X</a>
+                        </div>
+          
+                       
+                    </div>
+                    <hr>
+                <!-- Comments Section -->
+                <div class="comments">
+                    @include('twitter.shared.comment')
+                </div>
+            </div>
+          </div>
+          
         
       </div>
     </div>

@@ -1,17 +1,32 @@
-<div class="card-body">
-    <div class="d-flex justify-content-between">
-      <div>
-        <h5 class="card-title">User123</h5>
-        <p class="card-text">This is an example post. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Ut vehicula nisi vitae nisl dignissim, a dictum nulla lobortis.</p>
-      </div>
-      <div>
-        <img src="https://via.placeholder.com/50" alt="Profile Picture" class="rounded-circle">
-        <small class="text-muted">1 hour ago</small>
-      </div>
+<div class="card mb-3 shadow">
+  <div class="card-body">
+      <div class="row">
+        <div class="col-md-2">
+          <img src="https://via.placeholder.com/50" alt="Profile Picture" class="rounded-circle">
+          <p class="text-muted">1 hour ago</p>
+        </div>
+        <div class="col-md-7">
+          <h5 class="card-title">{{"Ihsaan"}}</h5>
+          <p class="card-text">{{$idea->content}}</p>
+        </div>
+    
+        <div class="col-md-3 text-right">
+          <a href="" class="btn btn-primary btn-sm mb-2">Edit</a>
+          <a href="{{ route('idea.show', $idea->id)}}" class="btn btn-warning btn-sm mb-2">View</a>
+          <a href="" class="btn btn-danger btn-sm mb-2">X</a>
+        </div>
+
+        
+    </div>
+    <!-- likes Section -->
+    <div>
+      <span class="text-muted mr-2">Likes 0</span>
+      <span class="text-muted mr-2">Comments 0</span>
     </div>
     <hr>
-    <!-- Comments Section -->
-    <div class="comments">
-        @include('twitter.shared.comment')
-    </div>
+      <!-- Comments Section -->
+      <div class="comments">
+          @include('twitter.shared.comment')
+      </div>
   </div>
+</div>

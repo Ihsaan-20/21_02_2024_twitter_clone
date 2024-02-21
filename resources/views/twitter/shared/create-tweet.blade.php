@@ -1,5 +1,5 @@
 <div class="card-body">
-    <form action="{{route('twitter.store')}}" enctype="multipart/form-data" method="POST">
+    <form action="{{route('idea.store')}}" enctype="multipart/form-data" method="POST">
       @csrf
       <div class="form-group">
         <label for="postTextarea">Share your idea</label>
