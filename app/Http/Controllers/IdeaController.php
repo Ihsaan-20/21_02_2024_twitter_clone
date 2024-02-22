@@ -14,15 +14,15 @@ class IdeaController extends Controller
         return view('twitter.home', compact('ideas'));
     }//end method;
 
-    public function store(Request $request)
+    public function store(Idea $idea)
     {
-        $request->validate([
+        request()->validate([
             'content' => 'required|string|min:5|max:255',
         ]);
        
 
         $idea = Idea::create([
-            'content' => $request->input('content', ''),
+            'content' => request()->get('content', ''),
             'user_id' => 1,
         ]);
 
@@ -43,7 +43,14 @@ class IdeaController extends Controller
 
     public function update(Idea $idea)
     {
-        dd('update');
+        request()->validate([
+            'content' => 'required|string|min:5|max:255',
+        ]);
+        $idea->content = request()->get('content', '');
+        $idea->user_id = 1;
+        $idea->save();
+
+        return redirect()->route('idea.show', $idea->id)->with('success', 'Idea updated successfully!');
     }
 
     public function destroy(Idea $idea)

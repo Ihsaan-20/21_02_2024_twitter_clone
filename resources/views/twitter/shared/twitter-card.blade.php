@@ -8,12 +8,13 @@
         <div class="col-md-7">
           <h5 class="card-title">{{"Ihsaan"}}</h5>
           <p class="card-text">{{$idea->content}}</p>
+
         </div>
     
         <div class="col-md-3 text-right">
-          <a href="" class="btn btn-primary btn-sm mb-2">Edit</a>
+          <a href="{{ route('idea.edit', $idea->id)}}" class="btn btn-primary btn-sm mb-2">Edit</a>
           <a href="{{ route('idea.show', $idea->id)}}" class="btn btn-warning btn-sm mb-2">View</a>
-          <a href="" class="btn btn-danger btn-sm mb-2">X</a>
+          <a href="{{ route('idea.index')}}" class="btn btn-danger btn-sm mb-2">X</a>
         </div>
 
         

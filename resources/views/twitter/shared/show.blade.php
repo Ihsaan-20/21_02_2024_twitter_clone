@@ -57,11 +57,30 @@
                         </div>
                         <div class="col-md-7">
                           <h5 class="card-title">{{"Ihsaan"}}</h5>
+                          @if($editing ?? '')
+                          <form action="{{route('idea.update', $idea->id)}}" enctype="multipart/form-data" method="POST">
+                            @method('put')
+                            @csrf
+                            <div class="form-group">
+                              <label for="postTextarea">Share your idea</label>
+                              <textarea class="form-control" id="postTextarea" name="content"  placeholder="share you idea..." rows="3">{{$idea->content}}</textarea>
+                              <span class="text-danger">
+                                @error('content')
+                                  {{$message}}
+                                @enderror
+                              </span>
+                            </div>
+                            <button type="submit" class="btn btn-primary px-5">Update </button>
+                          </form>
+                        @else
                           <p class="card-text">{{$idea->content}}</p>
+                        @endif
+
+
                         </div>
                     
                         <div class="col-md-3 text-right">
-                          <a href="" class="btn btn-primary btn-sm mb-2">Edit</a>
+                          <a href="{{ route('idea.edit', $idea->id)}}" class="btn btn-primary btn-sm mb-2">Edit</a>
                           <a href="{{route('idea.index')}}" class="btn btn-danger btn-sm mb-2">X</a>
                         </div>
           
