@@ -2,14 +2,16 @@
 
 namespace App\Http\Controllers;
 
+
 use App\Models\Idea;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class IdeaController extends Controller
 {
     public function index()
     {
-        $ideas = Idea::latest()->get();
+        $ideas = Idea::latest()->paginate(5);
         // dd($ideas);
         return view('twitter.home', compact('ideas'));
     }//end method;
@@ -19,11 +21,10 @@ class IdeaController extends Controller
         request()->validate([
             'content' => 'required|string|min:5|max:255',
         ]);
-       
 
         $idea = Idea::create([
             'content' => request()->get('content', ''),
-            'user_id' => 1,
+            'user_id' => Auth::user()->id,
         ]);
 
         return redirect()->back()->with('success', 'Idea has been successfully added.');
@@ -37,6 +38,10 @@ class IdeaController extends Controller
 
     public function edit(Idea $idea)
     {
+        if(Auth::user()->id !== $idea->user_id)
+        {
+            abort(404);
+        }
         $editing = true;
         return view('twitter.shared.show', compact('idea', 'editing'));
     }
@@ -47,7 +52,6 @@ class IdeaController extends Controller
             'content' => 'required|string|min:5|max:255',
         ]);
         $idea->content = request()->get('content', '');
-        $idea->user_id = 1;
         $idea->save();
 
         return redirect()->route('idea.show', $idea->id)->with('success', 'Idea updated successfully!');
@@ -55,7 +59,14 @@ class IdeaController extends Controller
 
     public function destroy(Idea $idea)
     {
-        dd('destroy');
+
+        try {
+            $idea->delete();
+            return back()->with('success', 'Idea deleted successfully!');
+        } catch (\Exception $e) {
+            return back()->with('error', 'Failed to delete idea. Please try again.');
+        }
     }
+
 
 }

@@ -27,9 +27,19 @@
     <div class="row">
         <div class="col-lg-12">
             <div class="d-flex justify-content-end">
-                <a href="" class="btn btn-primary mr-2 mb-3">Login</a>
-                <a href="" class="btn btn-primary mr-2 mb-3">Register</a>
-                <a href="" class="btn btn-danger mr-2 mb-3">Logout</a>
+              @guest
+                <a href="{{route('login')}}" class="btn btn-primary mr-2 mb-3">Login</a>
+                <a href="{{route('idea.create.new')}}" class="btn btn-primary mr-2 mb-3">Register</a>
+                
+              @endguest
+              @auth
+                <a href="" class="btn btn-success mr-2 mb-3">Profile</a>
+
+                <form action="{{route('logout')}}" method="POST">
+                  @csrf
+                    <button type="submit" class="btn btn-danger mr-2 mb-3">Logout</button>
+                </form>
+              @endauth
             </div>
         </div>
     </div>

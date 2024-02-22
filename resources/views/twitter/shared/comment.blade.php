@@ -9,10 +9,11 @@
      </form>
     </div>
   </div>
+
       @foreach ($idea->comments as $comment )
           <div class="d-flex justify-content-between">
             <div>
-              <strong>{{"admin"}}</strong>
+              <strong>{{$comment->user->name}}</strong>
               <p>{{$comment->content}}</p>
             </div>
             <div>

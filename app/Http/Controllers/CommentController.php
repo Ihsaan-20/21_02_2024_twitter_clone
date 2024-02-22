@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Idea;
 use App\Models\Comment;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class CommentController extends Controller
 {
@@ -13,7 +14,7 @@ class CommentController extends Controller
         $comment = Comment::create([
             'content' => $request->comment,
             'idea_id' => $idea->id,
-            'user_id' => 1,
+            'user_id' => Auth::user()->id,
         ]);
 
         return redirect()->route('idea.show', $idea->id)->with('success', 'Comment added successfully!');
